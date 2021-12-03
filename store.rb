@@ -1,16 +1,30 @@
 require 'json'
 require_relative 'board'
+require_relative 'list'
+require_relative 'card'
+
 class Store
-  attr_accessor :boards, :show_boards
+  attr_accessor :boards, :parse_boards, :get_lists
   def initialize(json_file) 
     @json_file = json_file
   end
 
-  def show_boards
+  def parse_boards
     boards = parse_json
     Board.reset_crr_id
     @boards = boards.map do |board| # [board1, board2] array of Board instances
       Board.new(board)
+    end
+  end
+
+  def get_lists(board_id)
+    board = find_board(board_id)
+    board.lists
+  end
+
+  def parse_cards(cards)
+    cards.map do |card|
+      Card.new(card)
     end
   end
 

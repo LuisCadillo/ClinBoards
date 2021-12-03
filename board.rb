@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :id,:name, :description, :reset_crr_id
+  attr_accessor :id,:name, :description, :lists, :reset_crr_id
   def initialize(id: nil, name:, description:, lists: [])
     @id = set_id(id)
     @name = name
@@ -21,7 +21,7 @@ class Board
   end
 
   def details 
-    [@id, @name, @description, compose_lists.join(', ')]
+    [@id, @name, @description, compose_lists(@lists)]
   end
   def update(name:, description:)
     @name = name unless name.nil? || name.empty?
@@ -29,9 +29,7 @@ class Board
   end
 
   private
-  def compose_lists
-    @lists.map do |list|
-      "#{list[:name]}(#{list[:cards].size})"
-    end
+  def compose_lists(lists)
+    lists.map { |list| "#{list[:name]}(#{list[:cards].size})" }.join(', ')
   end
 end
