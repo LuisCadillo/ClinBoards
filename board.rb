@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :id,:name, :description
+  attr_accessor :id,:name, :description, :reset_crr_id
   def initialize(id: nil, name:, description:, lists: [])
     @id = set_id(id)
     @name = name
@@ -10,6 +10,10 @@ class Board
   @@crr_id = 0
   def set_id(id)
     @id = @@crr_id += 1
+  end
+
+  def self.reset_crr_id # to avoid creating infinite increasing IDs
+    @@crr_id = 0
   end
 
   def to_json(_generator)

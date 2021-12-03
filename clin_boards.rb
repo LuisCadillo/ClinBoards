@@ -12,14 +12,14 @@ class ClinBoards
     until action == 'exit' 
       print_table(title: 'CLIn Boards',
                   headings: %w[ID Name Description List(#cards)],
-                  rows: @store.boards)  #To refresh the boards on each loop
+                  rows: @store.show_boards)  #To refresh the boards on each loop
       action, id = menu('Board', ['create', 'show ID', 'update ID', 'delete ID' ])
       case action
       when "create" then create_board
       when 'show'
         puts 'show in progress'
       when 'update' then update_board(id)
-      when 'delete'
+      when 'delete' then delete_board(id)
         puts 'delete in progress'
       end
     end
@@ -65,6 +65,10 @@ class ClinBoards
   def create_board
     new_data = board_form
     @store.create_board(new_data)
+  end
+
+  def delete_board(id)
+    @store.delete_board(id)
   end
 end
 

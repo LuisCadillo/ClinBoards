@@ -1,32 +1,33 @@
 require 'json'
 require_relative 'board'
 class Store
-  attr_accessor :boards
+  attr_accessor :boards, :show_boards
   def initialize(json_file) 
     @json_file = json_file
-    @boards = show_boards # [board1, board2] array of Board instances
   end
 
   def show_boards
     boards = parse_json
-    boards.map do |board|
+    Board.reset_crr_id
+    @boards = boards.map do |board| # [board1, board2] array of Board instances
       Board.new(board)
     end
   end
 
   def create_board(new_data)
     @boards << Board.new(new_data)
+    update_json
   end
 
   def update_board(board_id, new_data)
-    # incomplete
     board = find_board(board_id)
     board.update(new_data)
     update_json
   end
 
-  def delete_board
-
+  def delete_board(board_id)
+    @boards.delete_if { |board| board.id == board_id }
+    update_json
   end
 
   def create_list
