@@ -4,14 +4,18 @@ class Store
   attr_accessor :boards
   def initialize(json_file) 
     @json_file = json_file
-    @boards = create_boards # [board1, board2] array of Board instances
+    @boards = show_boards # [board1, board2] array of Board instances
   end
 
-  def create_boards
+  def show_boards
     boards = parse_json
     boards.map do |board|
       Board.new(board)
     end
+  end
+
+  def create_board(new_data)
+    @boards << Board.new(new_data)
   end
 
   def update_board(board_id, new_data)
