@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :name, :description
+  attr_accessor :id,:name, :description
   def initialize(id:, name:, description:, lists:)
     @id = set_id(id)
     @name = name
@@ -12,8 +12,13 @@ class Board
     @id = id || @@crr_id.next
   end
 
-  def details { [@id, @name, @description, @lists.size] }
+  def to_json(_generator)
+    { id: @id, name: @name, description: @description, lists: @lists }.to_json
+  end
 
+  def details 
+    [@id, @name, @description, @lists.size]
+  end
   def update(name:, description:)
     @name = name unless name.nil? || name.empty?
     @description = description unless description.nil? || name.empty?

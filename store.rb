@@ -3,11 +3,12 @@ require_relative 'board'
 class Store
   attr_accessor :boards
   def initialize(json_file) 
-    @boards = create_boards(json_file) # [board1, board2] array of Board instances
+    @json_file = json_file
+    @boards = create_boards # [board1, board2] array of Board instances
   end
 
-  def create_boards(json_file)
-    boards = parse_json(json_file)
+  def create_boards
+    boards = parse_json
     boards.map do |board|
       Board.new(board)
     end
@@ -65,15 +66,15 @@ class Store
   end
 
   private
-  def parse_json(json_file)
-    JSON.parse(File.read(json_file), symbolize_names: true)
+  def parse_json
+    JSON.parse(File.read(@json_file), symbolize_names: true)
   end
 
   def find_board(board_id)
     @boards.find { |board| board.id == board_id }
   end
 
-  def update_json(json_file)
-    JSON.write(File.read(json_file), @boards)
+  def update_json
+    File.write(@json_file, @boards.to_json)
   end
 end
