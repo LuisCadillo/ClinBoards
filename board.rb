@@ -21,10 +21,17 @@ class Board
   end
 
   def details 
-    [@id, @name, @description, @lists.size]
+    [@id, @name, @description, compose_lists.join(', ')]
   end
   def update(name:, description:)
     @name = name unless name.nil? || name.empty?
     @description = description unless description.nil? || name.empty?
+  end
+
+  private
+  def compose_lists
+    @lists.map do |list|
+      "#{list[:name]}(#{list[:cards].size})"
+    end
   end
 end
