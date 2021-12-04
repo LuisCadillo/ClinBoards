@@ -45,7 +45,7 @@ class ClinBoards
     puts out_message
     print '> '
     action, id = gets.chomp.split
-    [action, id.to_i]
+    out_message == 'exit' ? [action, id.to_i] : [action, id]
   end
 
   def board_form
@@ -90,7 +90,7 @@ class ClinBoards
                         out_message: 'back')
       case action
       when 'create-list' then create_list(board_id)
-      when 'update-list' then update_list(id)
+      when 'update-list' then update_list(id, board_id)
       when 'delete-list' then delete_list(id)
       when 'create-card' then create_card
       when 'update-card' then update_card(id)
@@ -102,6 +102,11 @@ class ClinBoards
   def create_list(board_id)
     name = list_form
     @store.create_list(name, board_id)
+  end
+
+  def update_list(list_name, board_id)
+    new_list_name = list_form[:name]
+    @store.update_list(new_name: new_list_name, name: list_name, board_id: board_id)
   end
 end
 

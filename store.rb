@@ -50,8 +50,12 @@ class Store
     update_json
   end
 
-  def update_list
-
+  def update_list(new_name:, name:, board_id:)
+    board = find_board(board_id)
+    found_list = board.lists.find {|list| list.name == name}
+    p found_list
+    found_list.name = new_name
+    update_json
   end
 
   def delete_list
