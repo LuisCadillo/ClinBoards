@@ -19,7 +19,8 @@ class Store
 
   def get_lists(board_id)
     board = find_board(board_id)
-    board.lists
+    @crr_board = board
+    @crr_board.lists
   end
 
   def parse_cards(cards)
@@ -44,22 +45,20 @@ class Store
     update_json
   end
 
-  def create_list(name, board_id)
-    board = find_board(board_id)
-    board.lists << List.new(name)
+  def create_list(name)
+    # board = find_board(board_id)
+    @crr_board.lists << List.new(name)
     update_json
   end
 
-  def update_list(new_name:, name:, board_id:)
-    board = find_board(board_id)
-    found_list = board.lists.find {|list| list.name == name}
-    p found_list
+  def update_list(new_name:, name:)
+    found_list = @crr_board.lists.find {|list| list.name == name}
     found_list.name = new_name
     update_json
   end
 
   def delete_list
-
+    
   end
 
   def create_card
