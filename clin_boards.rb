@@ -56,6 +56,12 @@ class ClinBoards
     { name: name, description: description }
   end
 
+  def list_form
+    print 'Name: '
+    name = gets.chomp
+    { name: name }
+  end
+
   def update_board(id)
     new_data = board_form
     @store.update_board(id, new_data)
@@ -75,15 +81,15 @@ class ClinBoards
     action = ''
     until action == 'back'
       lists.each do |list|
-        print_table(title: list[:name],
+        print_table(title: list.name,
                     headings: ['ID', 'Title', 'Members', 'Labels', 'Due Date', 'Checklist'],
-                    rows: @store.parse_cards(list[:cards]))
+                    rows: @store.parse_cards(list.cards))
       end
       action, id = menu(name: ['List', 'Card'],
                         first_options: ['create-list', 'update-list LISTNAME', 'delete-list LISTNAME'], second_options: ['create-card', 'checklist ID', 'update-card ID', 'delete-card ID'],
                         out_message: 'back')
       case action
-      when 'create-list' then create_list
+      when 'create-list' then create_list(board_id)
       when 'update-list' then update_list(id)
       when 'delete-list' then delete_list(id)
       when 'create-card' then create_card
@@ -91,8 +97,11 @@ class ClinBoards
       when 'delete-card' then delete_card(id)
       end
     end
-    # 1. select the correct board
-    # 2. create tables for each of the lists (headers will be the same always)
+  end
+
+  def create_list(board_id)
+    name = list_form
+    @store.create_list(name, board_id)
   end
 end
 

@@ -4,7 +4,7 @@ require_relative 'list'
 require_relative 'card'
 
 class Store
-  attr_accessor :boards, :parse_boards, :get_lists
+  attr_accessor :boards, :lists, :parse_boards, :get_lists
   def initialize(json_file) 
     @json_file = json_file
   end
@@ -23,7 +23,7 @@ class Store
   end
 
   def parse_cards(cards)
-    cards.map do |card|
+    @cards = cards.map do |card|
       Card.new(card)
     end
   end
@@ -44,8 +44,10 @@ class Store
     update_json
   end
 
-  def create_list
-
+  def create_list(name, board_id)
+    board = find_board(board_id)
+    board.lists << List.new(name)
+    update_json
   end
 
   def update_list
