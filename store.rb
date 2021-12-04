@@ -9,7 +9,7 @@ class Store
     @json_file = json_file
   end
 
-  def parse_boards
+  def generate_board_instances
     boards = parse_json
     Board.reset_crr_id
     @boards = boards.map do |board| # [board1, board2] array of Board instances
@@ -23,9 +23,9 @@ class Store
     @crr_board.lists
   end
 
-  def parse_cards(cards)
+  def generate_card_instances(cards)
     @cards = cards.map do |card|
-      Card.new(card)
+      Card.new(card) # neccesary to update the state of the tables every time after the user makes a change
     end
   end
 
@@ -46,27 +46,32 @@ class Store
   end
 
   def create_list(name)
-    # board = find_board(board_id)
     @crr_board.lists << List.new(name)
     update_json
   end
 
   def update_list(new_name:, name:)
-    found_list = @crr_board.lists.find {|list| list.name == name}
+    found_list = find_list(name)
     found_list.name = new_name
     update_json
   end
 
-  def delete_list
-    
+  def delete_list(name)
+    @crr_board.lists.delete_if {|list| list.name == name}
+    update_json
   end
 
-  def create_card
-
+  def create_card(&options)
+    card_id = calc_cards_q + 1
+    list_name, new_data = options.call(@crr_board.lists.map(&:name), card_id)
+    found_list = find_list(list_name)
+    found_list.cards << new_data
+    update_json
   end
 
   def update_card
-
+    
+    update_json
   end
 
   def delete_card
@@ -89,6 +94,10 @@ class Store
 
   end
 
+  def reset_cards_crr_id
+    Card.reset_crr_id
+  end
+
   private
   def parse_json
     JSON.parse(File.read(@json_file), symbolize_names: true)
@@ -96,6 +105,18 @@ class Store
 
   def find_board(board_id)
     @boards.find { |board| board.id == board_id }
+  end
+
+  def find_list(name)
+    @crr_board.lists.find {|list| list.name == name}
+  end
+
+  def calc_cards_q 
+    cards_q = 0
+    @crr_board.lists.each do |list|
+      cards_q += list.cards.size
+    end
+    return cards_q
   end
 
   def update_json

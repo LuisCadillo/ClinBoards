@@ -2,14 +2,14 @@ require_relative 'list'
 class Board
   attr_accessor :id,:name, :description, :lists, :reset_crr_id
   def initialize(id: nil, name:, description:, lists: [])
-    @id = set_id(id)
+    @id = set_id
     @name = name
     @description = description
     @lists = create_list_instances(lists)
   end
   
   @@crr_id = 0
-  def set_id(id)
+  def set_id
     @id = @@crr_id += 1
   end
 

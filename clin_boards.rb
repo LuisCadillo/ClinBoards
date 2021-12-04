@@ -12,7 +12,7 @@ class ClinBoards
     until action == 'exit' 
       print_table(title: 'CLIn Boards',
                   headings: %w[ID Name Description List(#cards)],
-                  rows: @store.parse_boards)  #To refresh the boards on each loop
+                  rows: @store.generate_board_instances)  #To refresh the boards on each loop
       action, id = menu(name: ['Board'], first_options: ['create', 'show ID', 'update ID', 'delete ID'], out_message: 'exit')
       case action
       when "create" then create_board
@@ -62,6 +62,23 @@ class ClinBoards
     { name: name }
   end
 
+  def card_form(options, id)
+    puts 'Select a list:'
+    puts options.join(' | ')
+    print '> '
+    list = gets.chomp
+    print 'Title: '
+    title = gets.chomp
+    print 'Members: '
+    members = gets.chomp.split(', ')
+    print 'Labels: '
+    labels = gets.chomp.split(', ')
+    print 'Due Date: '
+    due_date = gets.chomp
+
+    [list, {id: id, title: title, members: members, labels: labels, due_date: due_date}]
+  end
+
   def update_board(id)
     new_data = board_form
     @store.update_board(id, new_data)
@@ -80,10 +97,11 @@ class ClinBoards
     lists = @store.get_lists(board_id)
     action = ''
     until action == 'back'
+      @store.reset_cards_crr_id
       lists.each do |list|
         print_table(title: list.name,
                     headings: ['ID', 'Title', 'Members', 'Labels', 'Due Date', 'Checklist'],
-                    rows: @store.parse_cards(list.cards))
+                    rows: @store.generate_card_instances(list.cards))
       end
       action, id = menu(name: ['List', 'Card'],
                         first_options: ['create-list', 'update-list LISTNAME', 'delete-list LISTNAME'], second_options: ['create-card', 'checklist ID', 'update-card ID', 'delete-card ID'],
@@ -108,6 +126,15 @@ class ClinBoards
     new_name = list_form[:name]
     @store.update_list(new_name: new_name, name: name)
   end
+
+  def delete_list(name)
+    @store.delete_list(name)
+  end
+
+  def create_card
+    @store.create_card { |list, id| card_form(list, id) }
+  end
+
 end
 
 app = ClinBoards.new
