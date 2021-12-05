@@ -7,12 +7,14 @@ class Store
   attr_accessor :boards, :lists, :parse_boards, :get_lists
   def initialize(json_file) 
     @json_file = json_file
+    @boards = []
   end
 
   def generate_board_instances
     boards = parse_json
     Board.reset_crr_id
     @boards = boards.map do |board| # [board1, board2] array of Board instances
+      List.reset_crr_id
       Board.new(board)
     end
   end
@@ -21,12 +23,6 @@ class Store
     board = find_board(board_id)
     @crr_board = board
     @crr_board.lists
-  end
-
-  def generate_card_instances(cards)
-    @cards = cards.map do |card|
-      Card.new(card) # neccesary to update the state of the tables every time after the user makes a change
-    end
   end
 
   def create_board(new_data)
@@ -63,14 +59,16 @@ class Store
 
   def create_card(&options)
     card_id = calc_cards_q + 1
-    list_name, new_data = options.call(@crr_board.lists.map(&:name), card_id)
+    list_name, new_data = options.call(card_id, @crr_board.lists.map(&:name))
     found_list = find_list(list_name)
-    found_list.cards << new_data
+    found_list.cards << Card.new(new_data)
     update_json
   end
 
-  def update_card
-    
+  def update_card(id, new_data)
+    card = find_card(id)
+    pp card
+    card.update(new_data)
     update_json
   end
 
@@ -98,6 +96,11 @@ class Store
     Card.reset_crr_id
   end
 
+  def reorder_cards
+    cards = @crr_board.lists.map(&:cards).flatten
+    cards.each.with_index { |card, id| card.id = id + 1 }
+  end
+
   private
   def parse_json
     JSON.parse(File.read(@json_file), symbolize_names: true)
@@ -109,6 +112,13 @@ class Store
 
   def find_list(name)
     @crr_board.lists.find {|list| list.name == name}
+  end
+
+  def find_card(id)
+    card = @crr_board.lists.map do |list|
+      list.cards.find {|card| card.id == id}
+    end
+    return card.compact.first
   end
 
   def calc_cards_q 

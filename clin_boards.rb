@@ -62,11 +62,13 @@ class ClinBoards
     { name: name }
   end
 
-  def card_form(options, id)
-    puts 'Select a list:'
-    puts options.join(' | ')
-    print '> '
-    list = gets.chomp
+  def card_form(id, *options)
+    unless options.empty?
+      puts 'Select a list:'
+      puts options.join(' | ')
+      print '> '
+      list = gets.chomp
+    end
     print 'Title: '
     title = gets.chomp
     print 'Members: '
@@ -76,7 +78,8 @@ class ClinBoards
     print 'Due Date: '
     due_date = gets.chomp
 
-    [list, {id: id, title: title, members: members, labels: labels, due_date: due_date}]
+    return [list, {id: id, title: title, members: members, labels: labels, due_date: due_date}] unless options.empty?
+    return {id: id, title: title, members: members, labels: labels, due_date: due_date}
   end
 
   def update_board(id)
@@ -94,14 +97,15 @@ class ClinBoards
   end
 
   def show_lists(board_id)
-    lists = @store.get_lists(board_id)
     action = ''
     until action == 'back'
+      lists = @store.get_lists(board_id)
       @store.reset_cards_crr_id
+      @store.reorder_cards
       lists.each do |list|
         print_table(title: list.name,
                     headings: ['ID', 'Title', 'Members', 'Labels', 'Due Date', 'Checklist'],
-                    rows: @store.generate_card_instances(list.cards))
+                    rows: list.cards)
       end
       action, id = menu(name: ['List', 'Card'],
                         first_options: ['create-list', 'update-list LISTNAME', 'delete-list LISTNAME'], second_options: ['create-card', 'checklist ID', 'update-card ID', 'delete-card ID'],
@@ -111,7 +115,7 @@ class ClinBoards
       when 'update-list' then update_list(id)
       when 'delete-list' then delete_list(id)
       when 'create-card' then create_card
-      when 'update-card' then update_card(id)
+      when 'update-card' then update_card(id.to_i)
       when 'delete-card' then delete_card(id)
       end
     end
@@ -132,10 +136,21 @@ class ClinBoards
   end
 
   def create_card
-    @store.create_card { |list, id| card_form(list, id) }
+    @store.create_card { |id, list| card_form(id, list) }
   end
 
+  def update_card(id)
+    new_data = card_form(id)
+    @store.update_card(id, new_data)
+  end
 end
 
 app = ClinBoards.new
 app.start
+
+# def optional(*a,b,c)
+#   puts a if a
+#   puts c if c
+# end
+
+# optional(1,2,3)

@@ -1,6 +1,7 @@
 class Card
+  attr_accessor :id, :update
   def initialize(id:, title:, members:, labels:, due_date:, checklist:[])
-    @id = set_id
+    @id = set_id(id)
     @title = title
     @members = members
     @labels = labels
@@ -9,8 +10,8 @@ class Card
   end
 
   @@crr_id = 0
-  def set_id
-    @id = @@crr_id += 1
+  def set_id(id)
+    @id = id || @@crr_id += 1
   end
 
   def details
@@ -19,6 +20,14 @@ class Card
 
   def to_json(_generator)
     {id: @id, title: @title, members: @members, labels: @labels, due_date: @due_date, checklist: @checklist}.to_json
+  end
+
+  def update(id:, title:, members:, labels:, due_date:)
+    @id = id
+    @title = title
+    @members = members
+    @labels = labels
+    @due_date = due_date
   end
 
   private
