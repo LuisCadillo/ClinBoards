@@ -96,8 +96,10 @@ class Store
     update_json
   end
 
-  def delete_task
-
+  def delete_task(check_id, card_id)
+    card = find_card(card_id)
+    card.checklist.delete_if { |check| check.id == check_id }
+    update_json
   end
 
   def reset_cards_crr_id

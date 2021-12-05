@@ -180,6 +180,10 @@ class ClinBoards
     @store.toggle_task(check_id, card_id)
   end
 
+  def delete_task(check_id, card_id)
+    @store.delete_task(check_id, card_id)
+  end
+
   private
   def display_checklist(checklist)
     checklist.each do |item|
