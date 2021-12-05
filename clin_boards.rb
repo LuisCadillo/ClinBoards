@@ -106,7 +106,6 @@ class ClinBoards
     action = ''
     until action == 'back'
       lists = @store.get_lists(board_id)
-      @store.reset_cards_crr_id
       @store.reorder_cards
       lists.each do |list|
         print_table(title: list.name,
@@ -158,6 +157,7 @@ class ClinBoards
   def show_checklist(card_id)
     action = ''
     until action == 'back'
+      @store.reorder_checklist(card_id)
       checklist = @store.get_checklist(card_id)
       display_checklist(checklist)
       action, id = menu(name: ['Checklist'],
@@ -165,8 +165,8 @@ class ClinBoards
                         out_message: 'back')
       case action
       when 'add' then add_task(card_id)
-      when 'toggle' then toggle_task(id)
-      when 'delete' then delete_task(id)
+      when 'toggle' then toggle_task(id.to_i, card_id)
+      when 'delete' then delete_task(id.to_i, card_id)
       end
     end
   end
@@ -176,10 +176,14 @@ class ClinBoards
     @store.add_task(card_id, new_data)
   end
 
+  def toggle_task(check_id, card_id)
+    @store.toggle_task(check_id, card_id)
+  end
+
   private
   def display_checklist(checklist)
-    checklist.each_with_index do |item, index|
-      puts "[#{item.completed ? 'x' : ' '}] #{index + 1}. #{item.title}"
+    checklist.each do |item|
+      puts "[#{item.completed ? 'x' : ' '}] #{item.id}. #{item.title}"
     end
     puts '-' * 90
   end

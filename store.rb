@@ -89,12 +89,11 @@ class Store
     update_json
   end
 
-  def show_task
-
-  end
-
-  def toggle_task
-
+  def toggle_task(check_id, card_id)
+    card = find_card(card_id)
+    item = card.checklist.find { |check| check.id == check_id }
+    item.toggle
+    update_json
   end
 
   def delete_task
@@ -108,6 +107,11 @@ class Store
   def reorder_cards
     cards = @crr_board.lists.map(&:cards).flatten
     cards.each.with_index { |card, id| card.id = id + 1 }
+  end
+
+  def reorder_checklist(card_id)
+    card = find_card(card_id)
+    card.checklist.each.with_index { |check, id| check.id = id + 1 }
   end
 
   private
