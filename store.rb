@@ -72,8 +72,11 @@ class Store
     update_json
   end
 
-  def delete_card
-
+  def delete_card(id)
+    @crr_board.lists.each do |list|
+      list.cards.delete_if {|card| card.id == id}
+    end
+    update_json
   end
 
   def add_task

@@ -116,7 +116,7 @@ class ClinBoards
       when 'delete-list' then delete_list(id)
       when 'create-card' then create_card
       when 'update-card' then update_card(id.to_i)
-      when 'delete-card' then delete_card(id)
+      when 'delete-card' then delete_card(id.to_i)
       end
     end
   end
@@ -142,6 +142,10 @@ class ClinBoards
   def update_card(id)
     new_data = card_form(id)
     @store.update_card(id, new_data)
+  end
+
+  def delete_card(id)
+    @store.delete_card(id)
   end
 end
 
