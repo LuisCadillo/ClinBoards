@@ -2,6 +2,7 @@ require 'json'
 require_relative 'board'
 require_relative 'list'
 require_relative 'card'
+require_relative 'checklist'
 
 class Store
   attr_accessor :boards, :lists, :parse_boards, :get_lists
@@ -13,7 +14,7 @@ class Store
   def generate_board_instances
     boards = parse_json
     Board.reset_crr_id
-    @boards = boards.map do |board| # [board1, board2] array of Board instances
+    @boards = boards.map do |board|
       List.reset_crr_id
       Board.new(board)
     end
@@ -23,6 +24,10 @@ class Store
     board = find_board(board_id)
     @crr_board = board
     @crr_board.lists
+  end
+
+  def get_checklist(id)
+    find_card(id).checklist
   end
 
   def create_board(new_data)
@@ -67,7 +72,6 @@ class Store
 
   def update_card(id, new_data)
     card = find_card(id)
-    pp card
     card.update(new_data)
     update_json
   end
@@ -79,8 +83,10 @@ class Store
     update_json
   end
 
-  def add_task
-
+  def add_task(card_id, new_data)
+    card = find_card(card_id)
+    card.checklist << Checklist.new(new_data)
+    update_json
   end
 
   def show_task

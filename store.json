@@ -1,1 +1,341 @@
-[{"id":1,"name":"Extended - CLIn Boards","description":"Task management for the last extended","lists":[{"id":1,"name":"Todo","cards":[{"id":1,"title":"Check terminal-table gem","members":["Diego","Deyvi","Wences"],"labels":["investigate"],"due_date":"2020-11-19","checklist":[{"title":"Add gem to gemfile","completed":true},{"title":"Make an example and share with the team","completed":false},{"title":"Ask if this feature is mandatory","completed":true}]},{"id":2,"title":"Create JSON store","members":[],"labels":["Coding"],"due_date":"2020-11-20","checklist":[]}]},{"id":2,"name":"In Progress","cards":[{"id":3,"title":"Create List class","members":["Deyvi"],"labels":["coding","challenge"],"due_date":"2020-11-19","checklist":[{"title":"Define initialize method","completed":true},{"title":"Add public methods","completed":true},{"title":"Share with the team for feedback","completed":false}]},{"id":4,"title":"Create Card class","members":["Wences"],"labels":["coding"],"due_date":"2020-11-19","checklist":[{"title":"Define initialize method","completed":true},{"title":"Add public methods","completed":false},{"title":"Check dependency with list class","completed":false},{"title":"Share with the team for feedback","completed":false}]},{"id":5,"title":"Schedule standup meeting","members":["Diego","Wences","Deyvi"],"labels":["meetigns","important"],"due_date":"2020-11-20","checklist":[]}]},{"id":3,"name":"Code Review","cards":[{"id":6,"title":"Create Board class","members":["Diego"],"labels":["coding","challenge"],"due_date":"2020-11-19","checklist":[{"title":"Define initialize method","completed":true},{"title":"Add public methods","completed":true},{"title":"Share with the team for feedback","completed":true}]}]},{"id":4,"name":"Done","cards":[{"id":7,"title":"Divide tasks","members":["Diego","Wences","Deyvi"],"labels":["prep"],"due_date":"2020-11-19","checklist":[]}]},{"id":5,"name":"hola","cards":[{"id":8,"title":"testing","members":["LUisCA"],"labels":["test"],"due_date":"2021-12-06","checklist":[]},{"id":9,"title":"idk","members":["Pedro"],"labels":["joyeria","mouse","audio"],"due_date":"2021-12-08","checklist":[]}]},{"id":6,"name":"sdf","cards":[{"id":10,"title":"sdf","members":["adf"],"labels":["ag"],"due_date":"gd","checklist":[]},{"id":12,"title":"Hola","members":["NOSE","NOSE2"],"labels":["IDK","IDK2"],"due_date":"2202","checklist":[]},{"id":13,"title":"IDK","members":["IDK"],"labels":["IDK"],"due_date":"20024","checklist":[]},{"id":14,"title":"idk","members":["idk"],"labels":["idk"],"due_date":"dikd","checklist":[]},{"id":15,"title":"IDK","members":["IDK"],"labels":["IDK2"],"due_date":"2025","checklist":[]},{"id":16,"title":"sdf","members":["sdf"],"labels":["sd"],"due_date":"sdf","checklist":[]},{"id":17,"title":"sdlf","members":["lsdf"],"labels":["sdlf"],"due_date":"lsdf","checklist":[]},{"id":18,"title":"lasdkf","members":["dlsfk"],"labels":["sdlksjdf"],"due_date":"sldf","checklist":[]}]}]},{"id":2,"name":"Hey","description":"sdfl","lists":[{"id":1,"name":"todo","cards":[]},{"id":2,"name":"HOla","cards":[]},{"id":3,"name":"Perros","cards":[]}]},{"id":3,"name":"sldf","description":"lsdf","lists":[{"id":1,"name":"lasg","cards":[{"id":2,"title":"iekcio","members":["i93kc"],"labels":["39cms"],"due_date":"39k","checklist":[]}]},{"id":2,"name":"lsdf","cards":[{"id":1,"title":"lsoemc","members":["sick3"],"labels":["xmei"],"due_date":"slbi","checklist":[]}]}]},{"id":4,"name":"Testing","description":"Test","lists":[{"id":1,"name":"lsdf","cards":[{"id":1,"title":"HOLA","members":["sdflk"],"labels":["sdlsdf"],"due_date":"lsdf","checklist":[]}]},{"id":2,"name":"alsdkfj","cards":[{"id":2,"title":"sldkfj","members":["adflkjs"],"labels":["swlc"],"due_date":"dfe","checklist":[]}]}]},{"id":5,"name":"394","description":"92","lists":[{"id":1,"name":"icne","cards":[{"id":3,"title":"slkjc","members":["sinc"],"labels":["iwnc"],"due_date":"kjlci","checklist":[]}]},{"id":2,"name":"sdlk","cards":[{"id":1,"title":"lksji","members":["ckwnc"],"labels":["wicw"],"due_date":"iwc","checklist":[]},{"id":2,"title":"lkcien","members":["xi3nc"],"labels":["idn2"],"due_date":"pc","checklist":[]}]}]}]
+[
+  {
+    "id": 1,
+    "name": "Extended - CLIn Boards",
+    "description": "Task management for the last extended",
+    "lists": [
+      {
+        "id": 1,
+        "name": "Todo",
+        "cards": [
+          {
+            "id": 1,
+            "title": "Check terminal-table gem",
+            "members": ["Diego", "Deyvi", "Wences"],
+            "labels": ["investigate"],
+            "due_date": "2020-11-19",
+            "checklist": [
+              { "title": "Add gem to gemfile", "completed": true },
+              {
+                "title": "Make an example and share with the team",
+                "completed": false
+              },
+              {
+                "title": "Ask if this feature is mandatory",
+                "completed": true
+              },
+              { "title": "HOla", "completed": false },
+              { "title": "Que fue", "completed": false }
+            ]
+          },
+          {
+            "id": 2,
+            "title": "Create Manager class",
+            "members": [],
+            "labels": ["Coding"],
+            "due_date": "2020-11-20",
+            "checklist": []
+          },
+          {
+            "id": 3,
+            "title": "Create JSON store",
+            "members": [],
+            "labels": ["Coding"],
+            "due_date": "2020-11-20",
+            "checklist": []
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "In Progress",
+        "cards": [
+          {
+            "id": 4,
+            "title": "Create List class",
+            "members": ["Deyvi"],
+            "labels": ["coding", "challenge"],
+            "due_date": "2020-11-19",
+            "checklist": [
+              { "title": "Define initialize method", "completed": true },
+              { "title": "Add public methods", "completed": true },
+              {
+                "title": "Share with the team for feedback",
+                "completed": false
+              }
+            ]
+          },
+          {
+            "id": 5,
+            "title": "Create Card class",
+            "members": ["Wences"],
+            "labels": ["coding"],
+            "due_date": "2020-11-19",
+            "checklist": [
+              { "title": "Define initialize method", "completed": true },
+              { "title": "Add public methods", "completed": false },
+              {
+                "title": "Check dependency with list class",
+                "completed": false
+              },
+              {
+                "title": "Share with the team for feedback",
+                "completed": false
+              }
+            ]
+          },
+          {
+            "id": 6,
+            "title": "Schedule standup meeting",
+            "members": ["Diego", "Wences", "Deyvi"],
+            "labels": ["meetigns", "important"],
+            "due_date": "2020-11-20",
+            "checklist": []
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Code Review",
+        "cards": [
+          {
+            "id": 7,
+            "title": "Create Board class",
+            "members": ["Diego"],
+            "labels": ["coding", "challenge"],
+            "due_date": "2020-11-19",
+            "checklist": [
+              { "title": "Define initialize method", "completed": true },
+              { "title": "Add public methods", "completed": true },
+              { "title": "Share with the team for feedback", "completed": true }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Done",
+        "cards": [
+          {
+            "id": 8,
+            "title": "Divide tasks",
+            "members": ["Diego", "Wences", "Deyvi"],
+            "labels": ["prep"],
+            "due_date": "2020-11-19",
+            "checklist": []
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "hola",
+        "cards": [
+          {
+            "id": 9,
+            "title": "testing",
+            "members": ["LUisCA"],
+            "labels": ["test"],
+            "due_date": "2021-12-06",
+            "checklist": []
+          },
+          {
+            "id": 10,
+            "title": "idk",
+            "members": ["Pedro"],
+            "labels": ["joyeria", "mouse", "audio"],
+            "due_date": "2021-12-08",
+            "checklist": []
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "sdf",
+        "cards": [
+          {
+            "id": 11,
+            "title": "sdf",
+            "members": ["adf"],
+            "labels": ["ag"],
+            "due_date": "gd",
+            "checklist": []
+          },
+          {
+            "id": 12,
+            "title": "Teing",
+            "members": ["sl", "gas"],
+            "labels": ["adf", "dg"],
+            "due_date": "2021-12-08",
+            "checklist": []
+          },
+          {
+            "id": 13,
+            "title": "Testing",
+            "members": ["LuisCA", "Juan"],
+            "labels": ["test1", "test2"],
+            "due_date": "2024",
+            "checklist": []
+          },
+          {
+            "id": 14,
+            "title": "Hola",
+            "members": ["NOSE", "NOSE2"],
+            "labels": ["IDK", "IDK2"],
+            "due_date": "2202",
+            "checklist": []
+          },
+          {
+            "id": 15,
+            "title": "IDK",
+            "members": ["IDK"],
+            "labels": ["IDK"],
+            "due_date": "20024",
+            "checklist": []
+          },
+          {
+            "id": 16,
+            "title": "idk",
+            "members": ["idk"],
+            "labels": ["idk"],
+            "due_date": "dikd",
+            "checklist": []
+          },
+          {
+            "id": 17,
+            "title": "IDK",
+            "members": ["IDK"],
+            "labels": ["IDK2"],
+            "due_date": "2025",
+            "checklist": []
+          },
+          {
+            "id": 18,
+            "title": "sdf",
+            "members": ["sdf"],
+            "labels": ["sd"],
+            "due_date": "sdf",
+            "checklist": []
+          },
+          {
+            "id": 19,
+            "title": "hola",
+            "members": ["adf"],
+            "labels": ["adf"],
+            "due_date": "ad",
+            "checklist": []
+          },
+          {
+            "id": 20,
+            "title": "asdlfk",
+            "members": ["ldksfj"],
+            "labels": ["lsdkjf"],
+            "due_date": "lskdjf",
+            "checklist": []
+          },
+          {
+            "id": 21,
+            "title": "adg",
+            "members": ["ag"],
+            "labels": ["ag"],
+            "due_date": "ag",
+            "checklist": []
+          },
+          {
+            "id": 22,
+            "title": "sdlf",
+            "members": ["lsdf"],
+            "labels": ["sdlf"],
+            "due_date": "lsdf",
+            "checklist": []
+          },
+          {
+            "id": 23,
+            "title": "lasdkf",
+            "members": ["dlsfk"],
+            "labels": ["sdlksjdf"],
+            "due_date": "sldf",
+            "checklist": []
+          },
+          {
+            "id": 24,
+            "title": "sdfl",
+            "members": ["sdflsdf"],
+            "labels": ["sdflsdf"],
+            "due_date": "lsdf",
+            "checklist": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Test1",
+    "description": "Testing 1",
+    "lists": [
+      {
+        "id": 1,
+        "name": "lasg",
+        "cards": [
+          {
+            "id": 2,
+            "title": "iekcio",
+            "members": ["i93kc"],
+            "labels": ["39cms"],
+            "due_date": "39k",
+            "checklist": []
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "lsdf",
+        "cards": [
+          {
+            "id": 1,
+            "title": "lsoemc",
+            "members": ["sick3"],
+            "labels": ["xmei"],
+            "due_date": "slbi",
+            "checklist": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Testing",
+    "description": "Test",
+    "lists": [
+      {
+        "id": 1,
+        "name": "lsdf",
+        "cards": [
+          {
+            "id": 1,
+            "title": "HOLA",
+            "members": ["sdflk"],
+            "labels": ["sdlsdf"],
+            "due_date": "lsdf",
+            "checklist": []
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "alsdkfj",
+        "cards": [
+          {
+            "id": 2,
+            "title": "sldkfj",
+            "members": ["adflkjs"],
+            "labels": ["swlc"],
+            "due_date": "dfe",
+            "checklist": []
+          }
+        ]
+      }
+    ]
+  }
+]

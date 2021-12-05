@@ -16,9 +16,9 @@ class ClinBoards
       action, id = menu(name: ['Board'], first_options: ['create', 'show ID', 'update ID', 'delete ID'], out_message: 'exit')
       case action
       when "create" then create_board
-      when 'show' then show_lists(id)
-      when 'update' then update_board(id)
-      when 'delete' then delete_board(id)
+      when 'show' then show_lists(id.to_i)
+      when 'update' then update_board(id.to_i)
+      when 'delete' then delete_board(id.to_i)
       end
     end
     display_goodbye
@@ -45,7 +45,7 @@ class ClinBoards
     puts out_message
     print '> '
     action, id = gets.chomp.split
-    out_message == 'exit' ? [action, id.to_i] : [action, id]
+    [action, id]
   end
 
   def board_form
@@ -82,6 +82,12 @@ class ClinBoards
     return {id: id, title: title, members: members, labels: labels, due_date: due_date}
   end
 
+  def checklist_form
+    print 'Title: '
+    title = gets.chomp
+    { title: title, completed: false}
+  end
+
   def update_board(id)
     new_data = board_form
     @store.update_board(id, new_data)
@@ -115,6 +121,7 @@ class ClinBoards
       when 'update-list' then update_list(id)
       when 'delete-list' then delete_list(id)
       when 'create-card' then create_card
+      when 'checklist' then show_checklist(id.to_i)
       when 'update-card' then update_card(id.to_i)
       when 'delete-card' then delete_card(id.to_i)
       end
@@ -147,14 +154,36 @@ class ClinBoards
   def delete_card(id)
     @store.delete_card(id)
   end
+
+  def show_checklist(card_id)
+    action = ''
+    until action == 'back'
+      checklist = @store.get_checklist(card_id)
+      display_checklist(checklist)
+      action, id = menu(name: ['Checklist'],
+                        first_options: ['add', 'toggle INDEX', 'delete INDEX'],
+                        out_message: 'back')
+      case action
+      when 'add' then add_task(card_id)
+      when 'toggle' then toggle_task(id)
+      when 'delete' then delete_task(id)
+      end
+    end
+  end
+
+  def add_task(card_id)
+    new_data = checklist_form
+    @store.add_task(card_id, new_data)
+  end
+
+  private
+  def display_checklist(checklist)
+    checklist.each_with_index do |item, index|
+      puts "[#{item.completed ? 'x' : ' '}] #{index + 1}. #{item.title}"
+    end
+    puts '-' * 90
+  end
 end
 
 app = ClinBoards.new
 app.start
-
-# def optional(*a,b,c)
-#   puts a if a
-#   puts c if c
-# end
-
-# optional(1,2,3)

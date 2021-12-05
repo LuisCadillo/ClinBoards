@@ -1,12 +1,15 @@
+require_relative 'checklist'
 class Card
-  attr_accessor :id, :update
+  attr_accessor :id, :update, :checklist
   def initialize(id:, title:, members:, labels:, due_date:, checklist:[])
     @id = set_id(id)
     @title = title
     @members = members
     @labels = labels
     @due_date = due_date
-    @checklist = checklist
+    @checklist = create_checklist_instances(checklist)
+    pp @checklist
+    # @checklist.each { |item| pp item }
   end
 
   @@crr_id = 0
@@ -32,11 +35,17 @@ class Card
 
   private
   def show_checklist_progress
-    completed = @checklist.select { |item| item[:completed] }
+    completed = @checklist.select { |item| item.completed }
     "#{completed.size}/#{@checklist.size}"
   end
 
   def self.reset_crr_id # to avoid creating infinite increasing IDs
     @@crr_id = 0
+  end
+
+  def create_checklist_instances(cheklists)
+    cheklists.map do |cheklist|
+      Checklist.new(cheklist)
+    end
   end
 end
